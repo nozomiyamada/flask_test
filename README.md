@@ -1,6 +1,4 @@
-# flask_test
-
-### virtual environment
+# virtual environment
 
 - สร้าง virtual environment (ชื่อ `.venv`) 
 - activate virtual environment
@@ -21,7 +19,7 @@ install package ที่ต้องการเสร็จแล้ว เข
 (.venv) $ pip freeze > requirements.txt
 ~~~
 
-### packages ที่ต้องการ
+# packages ที่ต้องการ
 
 - `flask`
 - `gunicorn`  # application server สำหรับ python ไม่จำเป็น แต่มีดีกว่าตอนที่อัปโหลด
@@ -36,7 +34,7 @@ install package ที่ต้องการเสร็จแล้ว เข
 (other files ที่ไม่ต้องการ)
 ~~~
 
-### directories 
+# directories 
 
 ~~~
 (root directory)/
@@ -51,7 +49,7 @@ install package ที่ต้องการเสร็จแล้ว เข
 　└ app.py  # main program
 ~~~
 
-### `app.py`
+# `app.py`
 
 ~~~python:
 import random
@@ -79,7 +77,7 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
 ~~~
 
-### `jsonify` vs `render_template`
+# `jsonify` vs `render_template`
 
 `jsonify()` จะ return ข้อมูลอย่างเดียว (เหมือน PokeAPI) 
 
@@ -87,4 +85,40 @@ if __name__ == "__main__":
 
 ถ้าข้อมูลใหญ่ ควรส่งข้อมูลอย่างเดียวและให้ JavaScript เปลี่ยนเนื้อหาเว็บไซต์ (เช่น Ajax + vue.js)
 
+# run application
 
+~~~
+$ source .venv/bin/activate  # activate 
+(.venv) $ python app.py
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:8000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 261-778-169
+~~~
+
+ใส่ `http://0.0.0.0:8000/` ใน URL bar 
+
+เวลาปิด application กด `CTRL+C` or `command+C`
+
+# top page -> rendering page 
+
+`http://0.0.0.0:8000/`
+
+![toppage](https://user-images.githubusercontent.com/44984892/111415872-61cfbf80-8715-11eb-90f4-d711cbe3f5cd.png)
+
+# second page -> rendering page 
+
+`http://0.0.0.0:8000/second`
+
+![secondpage](https://user-images.githubusercontent.com/44984892/111415871-61372900-8715-11eb-9e92-31f8201aa528.png)
+
+# any word -> return json 
+
+`http://0.0.0.0:8000/(anyword)`
+
+![anyword](https://user-images.githubusercontent.com/44984892/111415865-5ed4cf00-8715-11eb-967d-e5b24db1ee7b.png)
