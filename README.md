@@ -51,21 +51,30 @@ install package ที่ต้องการเสร็จแล้ว เข
 
 # `app.py`
 
-~~~python:
+~~~python
 import random
 from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__) # flask app instance
 
-# top page
+### top page ###
 @app.route('/', methods=['GET', 'POST'])
 def page_top():
     return render_template('toppage.html') # rendering "toppage.html"
 
-# second page
-@app.route('/second', methods=['GET', 'POST'])
+### second page ###
+@app.route('/2', methods=['GET', 'POST'])
 def page_second():
-    return render_template('secondpage.html') # rendering "top.html"
+	if request.method == 'GET':
+		return render_template('page2.html') # rendering "page2.html"
+	elif request.method == 'POST':
+		text = request.form['input_text'].upper() # get text from form -> uppercase
+		return render_template('page2.html', return_text=text) # re-rendering "page2.html" with variable "return_text"
+
+### third page ###
+@app.route('/3', methods=['GET', 'POST'])
+def page_third():
+    return render_template('page3.html') # rendering "page3.html"
 
 # length page - return character length of the word as JSON
 @app.route('/<word>', methods=['GET', 'POST'])
@@ -76,6 +85,7 @@ if __name__ == "__main__":
     # debug=True -> reload automatically when update app.py
     app.run(host="0.0.0.0", port=8000, debug=True)
 ~~~
+
 
 # `jsonify` vs `render_template`
 
@@ -111,11 +121,17 @@ $ source .venv/bin/activate  # activate
 
 ![toppage](https://user-images.githubusercontent.com/44984892/111415872-61cfbf80-8715-11eb-90f4-d711cbe3f5cd.png)
 
-# second page -> rendering page 
+# second page -> rendering page & send form (POST method)
 
-`http://0.0.0.0:8000/second`
+`http://0.0.0.0:8000/2`
 
-![secondpage](https://user-images.githubusercontent.com/44984892/111415871-61372900-8715-11eb-9e92-31f8201aa528.png)
+![page2](https://user-images.githubusercontent.com/44984892/111420500-ea525e00-871d-11eb-9e5d-fbecc81c7b84.png)
+
+# third page -> rendering page with static file
+
+`http://0.0.0.0:8000/3`
+
+![page3](https://user-images.githubusercontent.com/44984892/111420593-179f0c00-871e-11eb-9505-748dadf4d50e.png)
 
 # any word -> return json 
 
