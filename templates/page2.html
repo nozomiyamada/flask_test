@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h4>this is second page</h4>
+<p>
+	input text and push send button<br>
+	uppercased text will be shown below
+</p>
+
+<form action="/2" method="POST">
+	<input type="text" name="input_text" style="width: 200px;">
+	<input type="submit" value="send">	
+</form>
+
+<p>{{ return_text }}</p> <!-- embed returned variable -->
+
+{% endblock %}
