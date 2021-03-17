@@ -33,7 +33,6 @@ install package ที่ต้องการเสร็จแล้ว เข
 `.gitignore`
 ~~~
 .venv
-.gitignore
 (other files ที่ไม่ต้องการ)
 ~~~
 
@@ -63,12 +62,17 @@ app = Flask(__name__) # flask app instance
 # top page
 @app.route('/', methods=['GET', 'POST'])
 def page_top():
-    return render_template('top.html') # rendering "top.html"
+    return render_template('toppage.html') # rendering "toppage.html"
 
-# length page - return character length of the word
+# second page
+@app.route('/second', methods=['GET', 'POST'])
+def page_second():
+    return render_template('secondpage.html') # rendering "top.html"
+
+# length page - return character length of the word as JSON
 @app.route('/<word>', methods=['GET', 'POST'])
 def page_length(word):
-    return jsonify({'length': len(word)})
+    return jsonify({'word': word, 'length': len(word)})
 
 if __name__ == "__main__":
     # debug=True -> reload automatically when update app.py
